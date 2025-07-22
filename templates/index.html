@@ -57,10 +57,10 @@
     <h2>Fiber Parameters</h2>
 
     <label for="fiber_type">Select Fiber Type</label>
-    <select id="fiber_type" onchange="setFiberDefaults()">
+    <select name="fiber_type" id="fiber_type" onchange="setFiberDefaults()">
       <option value="sumitomo" selected>Sumitomo</option>
       <option value="smf28">SMF28</option>
-      <option value="Personalizado">Personalizado</option>
+      <option value="Custom">Custom</option>
     </select>
 
     <label>Effective Area (m²)</label>
@@ -90,7 +90,7 @@
     <select name="modulation_type" id="modulation_type" onchange="setModulationDefaults()">
       <option value="DP-QPSK" selected>DP-QPSK</option>
       <option value="DP-8QAM">DP-8QAM</option>
-      <option value="Personalizado">Personalizado</option>
+      <option value="Custom">Custom</option>
     </select>
 
     <label>Ideal BER</label>
@@ -178,7 +178,7 @@
         n2: 2.59992795e-14,
         linear_attenuator: 0
       },
-      Personalizado: {
+      Custom: {
         Aeff: 0,
         attenuation: 0,
         D: 0,
@@ -234,7 +234,7 @@
         demux_attenuation: 8,
         potencia_mw_lancamento_booster: 39.8
       },
-      "Personalizado": {
+      "Custom": {
         ideal_ber: 0,
         power_start: 0,
         power_stop: 0,

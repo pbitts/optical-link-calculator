@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Optical Link Simulation Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 2rem;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="mb-4">Optical Link Simulation Results</h1>
+
+    <h3>BER vs Launch Power per Channel</h3>
+    <img src="{{ plot_url }}" alt="BER Plot">
+
+    <h3>Results Table</h3>
+    <div class="table-responsive">
+        {{ table | safe }}
+    </div>
+
+    <a href="/" class="btn btn-primary mt-4">Run New Simulation</a>
+</body>
+</html>
