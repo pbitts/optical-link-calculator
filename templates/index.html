@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optical Link Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 40px;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 1000px;
+      margin: auto;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      background: #007acc;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 30px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 30px;
+      background: #28a745;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="/calculate" method="post">
+    <h1>Optical Link Simulation</h1>
+
+    <h2>Fiber Parameters</h2>
+
+    <label for="fiber_type">Select Fiber Type</label>
+    <select id="fiber_type" onchange="setFiberDefaults()">
+      <option value="sumitomo" selected>Sumitomo</option>
+      <option value="smf28">SMF28</option>
+    </select>
+
+    <label>Effective Area (m²)</label>
+    <input type="number" name="Aeff" id="Aeff" step="any" required>
+
+    <label>Attenuation (dB/m)</label>
+    <input type="number" name="attenuation" id="attenuation" step="any" required>
+
+    <label>Chromatic Dispersion (ps/km.nm)</label>
+    <input type="number" name="D" id="D" step="any" required>
+
+    <label>Slope (ps/km.nm²)</label>
+    <input type="number" name="slope" id="slope" step="any" required>
+
+    <label>PMD (ps/√km)</label>
+    <input type="number" name="PMD" id="PMD" step="any" required>
+
+    <label>Nonlinear Index (n2)</label>
+    <input type="number" name="n2" id="n2" step="any" required>
+
+    <label>Linear Attenuator (dB)</label>
+    <input type="number" name="linear_attenuator" id="linear_attenuator" step="any" required>
+
+    <h2>Link Parameters</h2>
+
+    <label for="modulation_type">Modulation Type</label>
+    <select name="modulation_type" id="modulation_type" onchange="setModulationDefaults()">
+      <option value="DP-QPSK" selected>DP-QPSK</option>
+      <option value="DP-8QAM">DP-8QAM</option>
+    </select>
+
+    <label>Ideal BER</label>
+    <input type="number" name="ideal_ber" id="ideal_ber" step="any" required>
+
+    <label>Launch Power Start (dBm)</label>
+    <input type="number" name="power_start" id="power_start" required>
+
+    <label>Launch Power Stop (dBm)</label>
+    <input type="number" name="power_stop" id="power_stop" required>
+
+    <label>Launch Power Step (dB)</label>
+    <input type="number" name="power_step" id="power_step" step="any" required>
+
+    <label>Number of Channels</label>
+    <input type="number" name="n_channels" id="n_channels" required>
+
+    <label>Link Length (m)</label>
+    <input type="number" name="optical_link_length" id="optical_link_length" required>
+
+    <label>Channel Rate (bps)</label>
+    <input type="number" name="channel_rate" id="channel_rate" required>
+
+    <label>Amplifier Noise Figure (dB)</label>
+    <input type="number" name="amplifier_noise_figure" id="amplifier_noise_figure" step="any" required>
+
+    <label>Amplifier Spacing (m)</label>
+    <input type="number" name="amplifier_distance_spacing" id="amplifier_distance_spacing" required>
+
+    <label>Channel Spacing (Hz)</label>
+    <input type="number" name="channel_spacing" id="channel_spacing" required>
+
+    <label>Central Frequency (Hz)</label>
+    <input type="number" name="central_frequency" id="central_frequency" step="any" required>
+
+    <label>Symbol Rate (baud/s)</label>
+    <input type="number" name="R_bit_rate" id="R_bit_rate" required>
+
+    <label>Bits per Symbol (M)</label>
+    <input type="number" name="M" id="M" required>
+
+    <label>GEDFA Gain (dB)</label>
+    <input type="number" name="GEDFA" id="GEDFA" required>
+
+    <label>Effective Length (m)</label>
+    <input type="number" name="leff_a" id="leff_a" required>
+
+    <label>Noise Bandwidth (Hz)</label>
+    <input type="number" name="band_noise" id="band_noise" required>
+
+    <h2>Component Parameters</h2>
+
+    <label>Launch Booster Power (dBm)</label>
+    <input type="number" name="launch_booster_power_dB" id="launch_booster_power_dB" required>
+
+    <label>MUX Attenuation (dB)</label>
+    <input type="number" name="mux_attenuation" id="mux_attenuation" required>
+
+    <label>DEMUX Attenuation (dB)</label>
+    <input type="number" name="demux_attenuation" id="demux_attenuation" required>
+
+    <label>Booster Power (mW)</label>
+    <input type="number" name="potencia_mw_lancamento_booster" id="potencia_mw_lancamento_booster" step="any" required>
+
+    <button type="submit">Simulate Link</button>
+  </form>
+
+  <script>
+    const fiberValues = {
+      sumitomo: {
+        Aeff: 0.00015,
+        attenuation: 0.00015,
+        D: 20.9,
+        slope: 0.06,
+        PMD: 0.02,
+        n2: 2.59992795e-14,
+        linear_attenuator: 0
+      },
+      smf28: {
+        Aeff: 0.00008,
+        attenuation: 0.0002,
+        D: 16.75,
+        slope: 0.075,
+        PMD: 0.05,
+        n2: 2.59992795e-14,
+        linear_attenuator: 0
+      }
+    };
+
+    const modulationValues = {
+      "DP-QPSK": {
+        ideal_ber: 0.001,
+        power_start: -6,
+        power_stop: 10,
+        power_step: 0.5,
+        n_channels: 20,
+        optical_link_length: 8340000,
+        channel_rate: 100000000000,
+        amplifier_noise_figure: 9,
+        amplifier_distance_spacing: 60000,
+        channel_spacing: 100000000000,
+        central_frequency: 193410000000000,
+        R_bit_rate: 56000000000,
+        M: 2,
+        GEDFA: 9,
+        leff_a: 321700,
+        band_noise: 12500000000,
+        launch_booster_power_dB: 16,
+        mux_attenuation: 8,
+        demux_attenuation: 8,
+        potencia_mw_lancamento_booster: 39.8
+      },
+      "DP-8QAM": {
+        ideal_ber: 0.001,
+        power_start: -10,
+        power_stop: 10,
+        power_step: 1,
+        n_channels: 20,
+        optical_link_length: 8340000,
+        channel_rate: 100000000000,
+        amplifier_noise_figure: 9,
+        amplifier_distance_spacing: 60000,
+        channel_spacing: 100000000000,
+        central_frequency: 193410000000000,
+        R_bit_rate: 56000000000,
+        M: 2,
+        GEDFA: 9,
+        leff_a: 321700,
+        band_noise: 12500000000,
+        launch_booster_power_dB: 16,
+        mux_attenuation: 8,
+        demux_attenuation: 8,
+        potencia_mw_lancamento_booster: 39.8
+      }
+    };
+
+    function setFiberDefaults() {
+      const fiber = fiberValues[document.getElementById("fiber_type").value];
+      for (let key in fiber) document.getElementById(key).value = fiber[key];
+    }
+
+    function setModulationDefaults() {
+      const mod = modulationValues[document.getElementById("modulation_type").value];
+      for (let key in mod) document.getElementById(key).value = mod[key];
+    }
+
+    // Set defaults on load
+    window.onload = () => {
+      setFiberDefaults();
+      setModulationDefaults();
+    };
+  </script>
+</body>
+</html>
