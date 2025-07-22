@@ -9,8 +9,7 @@ This project is intended to help analyze Optical links' characteristics:
 - GNLI0
 
 ## Quick Start
-There is already sample data for you to starting using standard parameters of fiber and modulation at sample_data.py
+There is already sample data for you to starting using standard parameters of fiber and modulation at index.html
 It can be easily run by :
-    * using the command ```python main.py``` 
+    * using the command ```python app.py``` 
 
-*Documentation under construction...*

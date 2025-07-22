@@ -70,7 +70,7 @@ def calculate():
        # --- Gerar gráfico ---
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(power_per_channel, ber, marker='o')
-    ax.set_title(f'BER vs Launch Power - {fiber_type}')
+    ax.set_title(f'BER vs Launch Power - [Fiber "{fiber_type}" - Modulation "{modulation_type}"]')
     ax.set_xlabel('Launch Power per Channel (dBm)')
     ax.set_ylabel('Bit Error Rate (BER)')
     ax.set_yscale('log')

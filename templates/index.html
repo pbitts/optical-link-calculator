@@ -90,6 +90,7 @@
     <select name="modulation_type" id="modulation_type" onchange="setModulationDefaults()">
       <option value="DP-QPSK" selected>DP-QPSK</option>
       <option value="DP-8QAM">DP-8QAM</option>
+      <option value="DP-16QAM">DP-16QAM</option>
       <option value="Custom">Custom</option>
     </select>
 
@@ -216,6 +217,28 @@
         ideal_ber: 0.001,
         power_start: -10,
         power_stop: 10,
+        power_step: 1,
+        n_channels: 20,
+        optical_link_length: 8340000,
+        channel_rate: 100000000000,
+        amplifier_noise_figure: 9,
+        amplifier_distance_spacing: 60000,
+        channel_spacing: 100000000000,
+        central_frequency: 193410000000000,
+        R_bit_rate: 56000000000,
+        M: 2,
+        GEDFA: 9,
+        leff_a: 321700,
+        band_noise: 12500000000,
+        launch_booster_power_dB: 16,
+        mux_attenuation: 8,
+        demux_attenuation: 8,
+        potencia_mw_lancamento_booster: 39.8
+      },
+      "DP-16QAM": {
+        ideal_ber: 0.001,
+        power_start: -10,
+        power_stop: 11,
         power_step: 1,
         n_channels: 20,
         optical_link_length: 8340000,
