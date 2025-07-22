@@ -60,6 +60,7 @@
     <select id="fiber_type" onchange="setFiberDefaults()">
       <option value="sumitomo" selected>Sumitomo</option>
       <option value="smf28">SMF28</option>
+      <option value="Personalizado">Personalizado</option>
     </select>
 
     <label>Effective Area (m²)</label>
@@ -89,6 +90,7 @@
     <select name="modulation_type" id="modulation_type" onchange="setModulationDefaults()">
       <option value="DP-QPSK" selected>DP-QPSK</option>
       <option value="DP-8QAM">DP-8QAM</option>
+      <option value="Personalizado">Personalizado</option>
     </select>
 
     <label>Ideal BER</label>
@@ -175,6 +177,15 @@
         PMD: 0.05,
         n2: 2.59992795e-14,
         linear_attenuator: 0
+      },
+      Personalizado: {
+        Aeff: 0,
+        attenuation: 0,
+        D: 0,
+        slope: 0,
+        PMD: 0,
+        n2: 0,
+        linear_attenuator: 0
       }
     };
 
@@ -222,7 +233,29 @@
         mux_attenuation: 8,
         demux_attenuation: 8,
         potencia_mw_lancamento_booster: 39.8
-      }
+      },
+      "Personalizado": {
+        ideal_ber: 0,
+        power_start: 0,
+        power_stop: 0,
+        power_step: 0,
+        n_channels: 0,
+        optical_link_length: 0,
+        channel_rate: 0,
+        amplifier_noise_figure: 0,
+        amplifier_distance_spacing: 0,
+        channel_spacing: 0,
+        central_frequency: 0,
+        R_bit_rate: 0,
+        M: 0,
+        GEDFA: 0,
+        leff_a: 0,
+        band_noise: 0,
+        launch_booster_power_dB: 0,
+        mux_attenuation: 0,
+        demux_attenuation: 0,
+        potencia_mw_lancamento_booster: 0
+    }
     };
 
     function setFiberDefaults() {
