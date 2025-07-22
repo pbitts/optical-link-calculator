@@ -1,7 +1,6 @@
-from numpy.core.fromnumeric import reshape
-from math import erfc, pow, exp, log, degrees, radians, asinh, sqrt
+from math import erfc, pow, exp, log,  asinh, sqrt
+
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 

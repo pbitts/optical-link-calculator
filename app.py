@@ -1,9 +1,11 @@
 import os
+
 from flask import Flask, render_template, request
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
+
 from optical_link_calculator import OpticalLink
+
 
 app = Flask(__name__)
 
