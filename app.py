@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 
 from flask import Flask, render_template, request
@@ -77,7 +78,7 @@ def calculate():
     ax.set_ylabel('Bit Error Rate (BER)')
     ax.set_yscale('log')
     ax.grid(True)
-    plot_path = os.path.join('static', 'ber_plot.png')
+    plot_path = os.path.join('static', f'ber_plot_result-{datetime.now()}.png')
     plt.savefig(plot_path, bbox_inches='tight')
     plt.close()
 
